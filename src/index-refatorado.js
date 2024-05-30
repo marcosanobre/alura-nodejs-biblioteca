@@ -21,7 +21,7 @@ fs.readFile( link, 'utf-8', (erro, texto) => {
         // tratar o erro
         if ( erro.code === 'ENOENT' ) console.log('Arquivo passado na chamada, é inexistente.');
     }
-});
+} );
 
 function contaPalavras( texto ) {
     const paragrafos = extraiParagrafos(texto);
