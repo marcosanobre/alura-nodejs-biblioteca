@@ -27,6 +27,9 @@ fs.readFile( link, 'utf-8', (erro, texto) => {
     }
 } );
 
+/* 
+// Da forma ASSINCRONA explicita
+//
 async function criaESalvaArquivo( listaPalavras, endereco ) {
     const arquivoNovo = `${endereco}/resultado.txt`;
     const textoPalavras = JSON.stringify(listaPalavras);
@@ -37,6 +40,16 @@ async function criaESalvaArquivo( listaPalavras, endereco ) {
         throw erro;
     };
 };
+*/
 
+// Ou com PROMESSAS (promises)
+function criaESalvaArquivo( listaPalavras, endereco ) {
+    const arquivoNovo = `${endereco}/resultado.txt`;
+    const textoPalavras = JSON.stringify(listaPalavras);
+    fs.promises.writeFile( arquivoNovo, textoPalavras )
+        .then( () => { console.log( 'Arquivo criado.' ); } )
+        .catch( (erro) => {throw erro;} )
+        .finally( () => console.log( 'Operação finalizada.' ) ) 
+};
 
 
