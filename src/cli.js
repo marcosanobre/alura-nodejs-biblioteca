@@ -14,6 +14,8 @@ import { montaSaidaArquivo } from './helpers.js';
 
 import { Command } from 'commander';
 
+import chalk from 'chalk';
+
 const program = new Command();
 
 program
@@ -23,7 +25,7 @@ program
     .action( (options) => {
         const {texto, destino} = options;
         if ( !texto || !destino) {
-            console.error( 'erro: favor inserir caminho de Origem e Destino' );
+            console.error( chalk.redBright('erro: favor inserir caminho de Origem e Destino') );
             program.help();
             return;
         };
@@ -33,9 +35,9 @@ program
 
         try {
             processaArquivo(caminhoTexto, caminhoDestino);
-            console.log( 'Arquivo Texto processado com sucesso' );
+            console.log( chalk.green('Arquivo Texto processado com sucesso') );
         } catch (erro) {
-            console.log( 'Ocorreu um erro no processamento', erro);
+            console.log( chalk.redBright('Ocorreu um erro no processamento'), erro);
         };
     });
 
@@ -84,9 +86,9 @@ function criaESalvaArquivo( listaPalavras, endereco ) {
     //const textoPalavras = JSON.stringify(listaPalavras);
     const textoPalavras = montaSaidaArquivo(listaPalavras);
     fs.promises.writeFile( arquivoNovo, textoPalavras )
-        .then( () => { console.log( 'Arquivo criado.' ); } )
+        .then( () => { console.log( chalk.blueBright('Arquivo criado.') ); } )
         .catch( (erro) => {throw erro;} )
-        .finally( () => console.log( 'Operação finalizada.' ) ) 
+        .finally( () => console.log( chalk.yellowBright('Operação finalizada.') ) ) 
 };
 
 
